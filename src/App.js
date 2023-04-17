@@ -6,6 +6,7 @@ It contains the top-level state.
 ==================================================*/
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import axios from 'axios';
 
 // Import other components
 import Home from './components/Home';
@@ -33,6 +34,30 @@ class App extends Component {
     const newUser = {...this.state.currentUser};
     newUser.userName = logInInfo.userName;
     this.setState({currentUser: newUser})
+  }
+
+  async componentDidMount() {
+    let linkToCreditsAPI =  "https://johnnylaicode.github.io/api/credits.json";
+    let linkToDebitsAPI =  "https://johnnylaicode.github.io/api/debits.json";
+    try {
+      let creditResponse = await axios.get(linkToCreditsAPI);
+      let debitResponse = await axios.get(linkToDebitsAPI);
+      let accountBalance = 0;
+      for (let i of creditResponse.data) {
+        accountBalance += i.amount;
+      }
+      for (let i of debitResponse.data) {
+        accountBalance -= i.amount;
+      }
+      accountBalance = accountBalance.toFixed(2);
+
+      this.setState({accountBalance: accountBalance});
+      this.setState({creditList: creditResponse.data});
+      this.setState({debitList: debitResponse.data});
+    } 
+    catch(error) {
+      console.log(error);
+    }
   }
 
   // Create Routes and React elements to be rendered using React components
