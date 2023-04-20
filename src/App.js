@@ -54,7 +54,7 @@ class App extends Component {
       for (let i of debitResponse.data) {
         accountBalance -= i.amount;
       }
-      accountBalance = accountBalance.toFixed(2);
+      accountBalance = Math.round( accountBalance * 100 ) / 100;
 
       //Saves arrays and new accountBalance to state
       this.setState({accountBalance: accountBalance});
@@ -72,7 +72,7 @@ class App extends Component {
     debit.id = this.state.debitList.length + 1;
 
     //Update account balance with new debit entry
-    const newAccountBalance = (this.state.accountBalance - debit.amount).toFixed(2);
+    const newAccountBalance = Math.round( (this.state.accountBalance - debit.amount) * 100 ) / 100;
 
     //Save changes to accountBalance and insert debit into array
     this.setState({accountBalance: newAccountBalance})
@@ -85,7 +85,7 @@ class App extends Component {
     credit.id = this.state.creditList.length + 1;
 
     //Update account balance with new credit entry
-    const newAccountBalance = (this.state.accountBalance + credit.amount).toFixed(2);
+    const newAccountBalance = Math.round( (this.state.accountBalance + credit.amount) * 100 ) / 100;
 
     //Save changes to accountBalance and insert credit into array
     this.setState({accountBalance: newAccountBalance})
