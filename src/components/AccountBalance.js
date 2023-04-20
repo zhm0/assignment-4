@@ -9,7 +9,7 @@ class AccountBalance extends Component {
   // Display account balance
   render() {
     return (
-      <div>
+      <div style={{fontSize: 18, fontWeight: 'bold'}}>
         Balance: {this.props.accountBalance}
       </div>
     );
