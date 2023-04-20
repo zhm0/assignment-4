@@ -16,3 +16,51 @@ code {
 input, button {
 	margin: 5px;
 }
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.header-container {
+  background-color: lightblue;
+  display: flex;
+  flex-shrink: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  width: 500px;
+  align-content: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.transaction-container {
+  background-color: lightgray;
+  display: flex;
+  flex-shrink: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.transaction {
+  flex-direction: column;
+  width: 500px;
+  align-content: center;
+  justify-content: center;
+}
+.transaction-container:nth-child(even) {
+  background-color: white;
+}
