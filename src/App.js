@@ -72,11 +72,24 @@ class App extends Component {
     debit.id = this.state.debitList.length + 1;
 
     //Update account balance with new debit entry
-    let newAccountBalance = (this.state.accountBalance - debit.amount).toFixed(2);;
+    const newAccountBalance = (this.state.accountBalance - debit.amount).toFixed(2);
 
     //Save changes to accountBalance and insert debit into array
     this.setState({accountBalance: newAccountBalance})
     this.setState({debitList: [...this.state.debitList, debit]});
+  }
+
+  addCredit = (creditInfo) => {
+    //Create new credit object to insert into array
+    const credit = {...creditInfo};
+    credit.id = this.state.creditList.length + 1;
+
+    //Update account balance with new credit entry
+    const newAccountBalance = (this.state.accountBalance + credit.amount).toFixed(2);
+
+    //Save changes to accountBalance and insert credit into array
+    this.setState({accountBalance: newAccountBalance})
+    this.setState({creditList: [...this.state.creditList, credit]});
   }
 
   // Create Routes and React elements to be rendered using React components
@@ -87,7 +100,7 @@ class App extends Component {
       <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} />
     )
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
-    const CreditsComponent = () => (<Credits credits={this.state.creditList}/>) 
+    const CreditsComponent = () => (<Credits credits={this.state.creditList} addCredit={this.addCredit} accountBalance={this.state.accountBalance} />) 
     const DebitsComponent = () => (<Debits debits={this.state.debitList} addDebit={this.addDebit} accountBalance={this.state.accountBalance} />) 
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
