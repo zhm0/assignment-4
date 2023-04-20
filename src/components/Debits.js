@@ -6,6 +6,7 @@ Note: You need to work on this file for the Assignment.
 ==================================================*/
 import {Link} from 'react-router-dom';
 import AccountBalance from './AccountBalance';
+import ListView from './ListView';
 
 const Debits = (props) => {
 
@@ -41,45 +42,13 @@ const Debits = (props) => {
     }
   }
 
-  //Style list in three separate columns
-  const styles = {
-    container: {
-      display: 'flex',
-    },
-    columns: {
-      flex: 1,
-      margin: 5,
-    },
-  };
-
-  // Create the list of Debit items
-  let debitsView = () => {
-    const { debits } = props;
-    return debits.map((debit) => {  // Extract "id", "amount", "description" and "date" properties of each debits JSON array element
-      let date = debit.date.slice(0,10);
-      return (
-      <li key={debit.id} style={styles.container}>
-        <p style={styles.columns}>{date}</p>
-        <p style={styles.columns}>{debit.description}</p>
-        <p style={styles.columns}>{debit.amount.toFixed(2)}</p>
-      </li>
-      );
-    });
-  }
   // Render the list of Debit items and a form to input new Debit item
   return (
-    <div>
-      <h1>Debits</h1>
+    <div className='landing-page'>
+      <h1 style={{textDecoration: 'underline'}}>Debits</h1>
       <h2>Debit History</h2>
 
-      <li key={0} style={styles.container}>
-        <b style={styles.columns}>Date</b>
-        <b style={styles.columns}>Description</b>
-        <b style={styles.columns}>Amount</b>
-      </li>
-      {debitsView()}
-
-      <br/>
+      <ListView list={props.debits}/>
       <br/>
       <br/>
       <AccountBalance accountBalance={props.accountBalance}/>
